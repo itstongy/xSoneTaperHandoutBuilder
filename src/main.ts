@@ -529,6 +529,12 @@ function render() {
               : `<div class="notice mt-4">Generate the handout after reviewing steps to see the final schedule.</div>`
           }
           <p class="notice mt-4">Check off each day after taking the dose.</p>
+          <div class="no-print mt-4 text-xs text-ink/60">
+            Other tools:
+            <a class="underline" href="https://itstongy.github.io/Days-Since-for-Pharmacists/" target="_blank" rel="noreferrer">
+              Days Since for Pharmacists
+            </a>
+          </div>
         </section>
       </main>
     </div>
