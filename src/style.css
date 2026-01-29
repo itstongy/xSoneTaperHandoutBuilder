@@ -1,0 +1,93 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Work+Sans:wght@400;500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-fog text-ink font-body;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-ink;
+  }
+
+  input,
+  select,
+  button {
+    @apply font-body;
+  }
+}
+
+@layer components {
+  .pill {
+    @apply rounded-full border border-clay bg-white px-3 py-1 text-sm shadow-lift;
+  }
+
+  .panel {
+    @apply rounded-2xl border border-clay bg-white/90 p-5 shadow-soft;
+  }
+
+  .field {
+    @apply flex flex-col gap-1;
+  }
+
+  .field-label {
+    @apply text-[0.7rem] uppercase tracking-[0.12em] text-ink/60;
+  }
+
+  .input {
+    @apply w-full rounded-xl border border-clay bg-white px-3 py-2 text-sm;
+  }
+
+  .btn {
+    @apply rounded-full border border-clay bg-white px-4 py-2 text-sm font-semibold text-ink shadow-lift transition;
+  }
+
+  .btn-primary {
+    @apply border-moss bg-moss text-white;
+  }
+
+  .btn-ghost {
+    @apply bg-transparent shadow-none;
+  }
+
+  .notice {
+    @apply rounded-xl border border-dashed border-sun bg-sun/20 px-3 py-2 text-xs text-ink/70;
+  }
+}
+
+@media print {
+  @page {
+    margin: 12mm;
+  }
+
+  body {
+    background: #fff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .app-shell {
+    background: #fff !important;
+    background-image: none !important;
+  }
+
+  .panel {
+    box-shadow: none !important;
+    border: none !important;
+    background: #fff !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+}
