@@ -10,7 +10,7 @@ Medication labels can become long and confusing when tapers are complex. This to
 - **Manual review/edit** of every taper step before generating the handout.
 - **Printable output** with minimal ink usage and a checkbox for each day.
 - **Date or dateless** schedules (calendar dates optional).
-- **Prednisone or prednisolone** selection (Solone/Sone).
+- **Prednisone, prednisolone, or dexamethasone** selection (Solone/Sone).
 - **Multiple tablet strengths** supported with custom strength entry.
 
 ## Screenshots

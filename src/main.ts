@@ -18,7 +18,7 @@ type AutoConfig = {
 };
 
 type AppState = {
-  medication: "prednisolone" | "prednisone";
+  medication: "prednisolone" | "prednisone" | "dexamethasone";
   useDates: boolean;
   startDate: string;
   strengths: number[];
@@ -353,8 +353,12 @@ function renderScheduleTable() {
 function render() {
   normalizeStrengths();
 
-  const medicationLabel =
-    state.medication === "prednisolone" ? "Prednisolone (Sone)" : "Prednisone (Solone)";
+  const medicationLabelMap: Record<AppState["medication"], string> = {
+    prednisolone: "Prednisolone (Sone)",
+    prednisone: "Prednisone (Solone)",
+    dexamethasone: "Dexamethasone",
+  };
+  const medicationLabel = medicationLabelMap[state.medication];
 
   appEl.innerHTML = `
     <div class="app-shell min-h-screen bg-[radial-gradient(circle_at_top,_#f6faf8_0%,_#e7f0ea_45%,_#dbe3de_100%)]">
@@ -390,6 +394,12 @@ function render() {
       state.medication === "prednisone" ? "checked" : ""
     } />
                   Prednisone (Solone)
+                </label>
+                <label class="pill flex items-center gap-2">
+                  <input type="radio" name="medication" value="dexamethasone" data-action="set-medication" ${
+      state.medication === "dexamethasone" ? "checked" : ""
+    } />
+                  Dexamethasone
                 </label>
               </div>
             </div>
