@@ -29,6 +29,16 @@ type AppState = {
 };
 
 const DEFAULT_STRENGTHS = [1, 2.5, 5, 10, 20, 25];
+const MEDICATION_STRENGTHS: Record<AppState["medication"], number[]> = {
+  prednisolone: DEFAULT_STRENGTHS,
+  prednisone: DEFAULT_STRENGTHS,
+  dexamethasone: [0.5, 4],
+};
+const MEDICATION_DEFAULT_SELECTED: Record<AppState["medication"], number[]> = {
+  prednisolone: [25, 5],
+  prednisone: [25, 5],
+  dexamethasone: [4, 0.5],
+};
 const DEFAULT_FREQUENCIES = [
   "Once daily (od)",
   "Twice daily (bd)",
@@ -49,7 +59,7 @@ function getInitialState(): AppState {
     medication: "prednisolone",
     useDates: true,
     startDate: "",
-    strengths: [25, 5],
+    strengths: [...MEDICATION_DEFAULT_SELECTED.prednisolone],
     customStrength: "",
     segments: [
       createSegment({ days: 3, frequency: "Once daily (od)", tablets: { 25: 1, 5: 1 } }),
@@ -220,7 +230,8 @@ function generateAutoSchedule() {
 }
 
 function renderStrengths() {
-  return DEFAULT_STRENGTHS.map((strength) => {
+  const strengths = MEDICATION_STRENGTHS[state.medication];
+  return strengths.map((strength) => {
     const checked = state.strengths.includes(strength);
     return `
       <label class="pill flex items-center gap-2">
@@ -683,6 +694,10 @@ function handleInput(event: Event) {
 
   if (action === "set-medication") {
     state.medication = target.value as AppState["medication"];
+    state.strengths = [...MEDICATION_DEFAULT_SELECTED[state.medication]];
+    state.customStrength = "";
+    normalizeStrengths();
+    state.auto.stepStrength = state.strengths[0] ?? 0;
     state.handoutReady = false;
     render();
     return;
